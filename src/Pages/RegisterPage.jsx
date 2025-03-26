@@ -183,7 +183,7 @@ const RegisterPage = () => {
               </div>
               <div className="form-field">
                 <label>Discharge Date</label>
-                <input type="date" name="dischargeDate" onChange={handleChange} />
+                <input type="date" name="dischargeDate" onChange={handleChange} min={new Date().toISOString().split('T')[0]} />
               </div>
             </div>
           </div>

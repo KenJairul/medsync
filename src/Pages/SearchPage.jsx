@@ -219,14 +219,14 @@ const SearchPage = () => {
                       <span>{selectedRecord.hospitalName || 'Not recorded'}</span>
                     </div>
                     <div className="record-field">
+                      <strong>Admission Date</strong>
+                      <span>{formatDate(selectedRecord.admissionDate)}</span>
+                    </div>
+                    <div className="record-field">
                       <strong>Discharge Date</strong>
                       <span>
                         {formatDate(selectedRecord.dischargeDate) || 'Not discharged'}
                       </span>
-                    </div>
-                    <div className="record-field">
-                      <strong>Date of Visit</strong>
-                      <span>{formatDate(selectedRecord.dateOfVisit)}</span>
                     </div>
                   </div>
                 </div>
