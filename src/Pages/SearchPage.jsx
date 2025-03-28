@@ -199,7 +199,7 @@ const SearchPage = () => {
                       </span>
                     </div>
                     <div className="record-field full-width">
-                      <strong>Doctor's Notes</strong>
+                      <strong>History</strong>
                       <span>
                         {selectedRecord.doctorNotes || 'No notes recorded'}
                       </span>

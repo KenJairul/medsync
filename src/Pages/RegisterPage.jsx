@@ -106,7 +106,7 @@ const RegisterPage = () => {
                   <option value="">Select Gender</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
-                  <option value="Other">Other</option>
+                  <option value="Other">Prefer not to say</option>
                 </select>
               </div>
               <div className="form-field">
@@ -158,7 +158,7 @@ const RegisterPage = () => {
               <textarea name="medications" onChange={handleChange}></textarea>
             </div>
             <div className="form-field">
-              <label>Doctor's Notes</label>
+              <label>History</label>
               <textarea name="doctorNotes" onChange={handleChange}></textarea>
             </div>
           </div>
