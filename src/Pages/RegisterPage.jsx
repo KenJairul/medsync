@@ -32,7 +32,7 @@ const RegisterPage = () => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/medical-records`,
+        `${import.meta.env.VITE_API_URL}/api/medical-records`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

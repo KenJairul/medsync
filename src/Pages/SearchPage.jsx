@@ -20,7 +20,7 @@ const SearchPage = () => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/medical-records/search?query=${encodeURIComponent(searchTerm)}`
+        `${import.meta.env.VITE_API_URL}/api/medical-records/search?query=${encodeURIComponent(searchTerm)}`
       );
 
       if (response.ok) {
@@ -98,7 +98,7 @@ const SearchPage = () => {
       }
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/medical-records/${selectedRecord._id}`,
+        `${import.meta.env.VITE_API_URL}/api/medical-records/${selectedRecord._id}`,
         {
           method: 'PUT',
           headers: {
@@ -136,7 +136,7 @@ const SearchPage = () => {
     ) {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/api/medical-records/${selectedRecord._id}`,
+          `${import.meta.env.VITE_API_URL}/api/medical-records/${selectedRecord._id}`,
           {
             method: 'DELETE',
           }
@@ -278,20 +278,159 @@ const SearchPage = () => {
             <div className="modal-body">
               {isEditing ? (
                 <form onSubmit={handleEditFormSubmit} className="edit-form">
-                  {/* ...form fields as in your original code... */}
-                  {/* For brevity, keep your existing form fields here */}
-                  {/* ... */}
-                  <div className="form-actions">
-                    <button type="submit" className="save-btn">
-                      Save Changes
-                    </button>
-                    <button
-                      type="button"
-                      className="cancel-btn"
-                      onClick={handleCancelEdit}
+                  <div className="form-group">
+                    <label>Patient Name:</label>
+                    <input
+                      type="text"
+                      name="patientName"
+                      value={editFormData.patientName || ''}
+                      onChange={handleEditFormChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Age:</label>
+                    <input
+                      type="number"
+                      name="age"
+                      value={editFormData.age || ''}
+                      onChange={handleEditFormChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Gender:</label>
+                    <select
+                      name="gender"
+                      value={editFormData.gender || ''}
+                      onChange={handleEditFormChange}
+                      required
                     >
-                      Cancel
-                    </button>
+                      <option value="">Select gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label>Contact Number:</label>
+                    <input
+                      type="text"
+                      name="contactNumber"
+                      value={editFormData.contactNumber || editFormData.contact || ''}
+                      onChange={handleEditFormChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Address:</label>
+                    <textarea
+                      name="address"
+                      value={editFormData.address || ''}
+                      onChange={handleEditFormChange}
+                      required
+                    ></textarea>
+                  </div>
+                  <div className="form-group">
+                    <label>Blood Type:</label>
+                    <select
+                      name="bloodType"
+                      value={editFormData.bloodType || ''}
+                      onChange={handleEditFormChange}
+                    >
+                      <option value="">Select blood type</option>
+                      <option value="A+">A+</option>
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option>
+                      <option value="B-">B-</option>
+                      <option value="AB+">AB+</option>
+                      <option value="AB-">AB-</option>
+                      <option value="O+">O+</option>
+                      <option value="O-">O-</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label>Diagnosis:</label>
+                    <textarea
+                      name="diagnosis"
+                      value={editFormData.diagnosis || ''}
+                      onChange={handleEditFormChange}
+                      required
+                    ></textarea>
+                  </div>
+                  <div className="form-group">
+                    <label>Treatment:</label>
+                    <textarea
+                      name="treatment"
+                      value={editFormData.treatment || ''}
+                      onChange={handleEditFormChange}
+                      required
+                    ></textarea>
+                  </div>
+                  <div className="form-group">
+                    <label>Medications:</label>
+                    <textarea
+                      name="medications"
+                      value={editFormData.medications || ''}
+                      onChange={handleEditFormChange}
+                    ></textarea>
+                  </div>
+                  <div className="form-group">
+                    <label>Doctor's Name:</label>
+                    <input
+                      type="text"
+                      name="doctorName"
+                      value={editFormData.doctorName || ''}
+                      onChange={handleEditFormChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Doctor's Notes:</label>
+                    <textarea
+                      name="doctorNotes"
+                      value={editFormData.doctorNotes || ''}
+                      onChange={handleEditFormChange}
+                    ></textarea>
+                  </div>
+                  <div className="form-group">
+                    <label>Hospital Name:</label>
+                    <input
+                      type="text"
+                      name="hospitalName"
+                      value={editFormData.hospitalName || ''}
+                      onChange={handleEditFormChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Admission Date:</label>
+                    <input
+                      type="date"
+                      name="admissionDate"
+                      value={editFormData.admissionDate ? new Date(editFormData.admissionDate).toISOString().split('T')[0] : ''}
+                      onChange={handleEditFormChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Discharge Date:</label>
+                    <input
+                      type="date"
+                      name="dischargeDate"
+                      value={editFormData.dischargeDate ? new Date(editFormData.dischargeDate).toISOString().split('T')[0] : ''}
+                      onChange={handleEditFormChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Allergies:</label>
+                    <textarea
+                      name="allergies"
+                      value={editFormData.allergies || ''}
+                      onChange={handleEditFormChange}
+                    ></textarea>
+                  </div>
+                  <div className="form-actions">
+                    <button type="submit" className="save-btn">Save Changes</button>
+                    <button type="button" className="cancel-btn" onClick={handleCancelEdit}>Cancel</button>
                   </div>
                 </form>
               ) : (
@@ -312,7 +451,73 @@ const SearchPage = () => {
                       </div>
                     </div>
                   </div>
-                  {/* ...rest of the details as in your original code... */}
+                  <div className="record-sections">
+                    <div className="record-section">
+                      <h5 className="section-title">Personal Information</h5>
+                      <div className="record-details">
+                        <div className="record-field">
+                          <strong>Contact</strong>
+                          <span>{selectedRecord.contactNumber || selectedRecord.contact || 'Not provided'}</span>
+                        </div>
+                        <div className="record-field">
+                          <strong>Address</strong>
+                          <span>{selectedRecord.address || 'Not provided'}</span>
+                        </div>
+                        <div className="record-field">
+                          <strong>Blood Type</strong>
+                          <span>{selectedRecord.bloodType || 'Not recorded'}</span>
+                        </div>
+                        <div className="record-field">
+                          <strong>Allergies</strong>
+                          <span>{selectedRecord.allergies || 'None reported'}</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="record-section">
+                      <h5 className="section-title">Medical Information</h5>
+                      <div className="record-details">
+                        <div className="record-field full-width">
+                          <strong>Diagnosis</strong>
+                          <span>{selectedRecord.diagnosis || 'No diagnosis recorded'}</span>
+                        </div>
+                        <div className="record-field full-width">
+                          <strong>Treatment</strong>
+                          <span>{selectedRecord.treatment || 'No treatment recorded'}</span>
+                        </div>
+                        <div className="record-field full-width">
+                          <strong>Medications</strong>
+                          <span>{selectedRecord.medications || 'No medications recorded'}</span>
+                        </div>
+                        <div className="record-field full-width">
+                          <strong>Doctor's Notes</strong>
+                          <span>{selectedRecord.doctorNotes || 'No notes recorded'}</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="record-section">
+                      <h5 className="section-title">Hospital Details</h5>
+                      <div className="record-details">
+                        <div className="record-field">
+                          <strong>Doctor's Name</strong>
+                          <span>{selectedRecord.doctorName || 'Not assigned'}</span>
+                        </div>
+                        <div className="record-field">
+                          <strong>Hospital Name</strong>
+                          <span>{selectedRecord.hospitalName || 'Not recorded'}</span>
+                        </div>
+                        <div className="record-field">
+                          <strong>Admission Date</strong>
+                          <span>{formatDate(selectedRecord.admissionDate)}</span>
+                        </div>
+                        <div className="record-field">
+                          <strong>Discharge Date</strong>
+                          <span>{formatDate(selectedRecord.dischargeDate) || 'Not discharged'}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </>
               )}
             </div>
