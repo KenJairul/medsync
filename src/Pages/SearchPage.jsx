@@ -20,7 +20,7 @@ const SearchPage = () => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/medical-records/search?query=${searchTerm}`
+        `${process.env.REACT_APP_API_URL}/api/medical-records/search?query=${encodeURIComponent(searchTerm)}`
       );
 
       if (response.ok) {
