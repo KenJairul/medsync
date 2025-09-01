@@ -1,16 +1,30 @@
-import { Link } from "react-router-dom";
-import "./Navbar.css";
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import './Navbar.css';
 
 const Navbar = () => {
-  return (
-    <div className="nav">
-      <Link to="/" className="nav-logo">MedSync</Link>
-      <ul className="nav-menu">
-        <li><Link to="/register">Register</Link></li>
-        <li><Link to="/search" className="nav-records">Records</Link></li>
-      </ul>
-    </div>
-  );
+    const location = useLocation();
+    const currentPath = location.pathname;
+
+    return (
+        <nav className="nav">
+            <a href="/" className="nav-logo">MedSync</a>
+            <div className="nav-menu">
+                <a 
+                    href="/register" 
+                    className={currentPath === '/register' ? 'active' : ''}
+                >
+                    Register
+                </a>
+                <a 
+                    href="/search" 
+                    className={`nav-records ${currentPath === '/search' ? 'active' : ''}`}
+                >
+                    Records
+                </a>
+            </div>
+        </nav>
+    );
 };
 
 export default Navbar;
