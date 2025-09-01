@@ -12,7 +12,7 @@ const Hero = ({heroData, setHeroCount, heroCount, setPlayStatus, playStatus}) =>
         <p>{heroData.text2}</p>
       </div>
       <div className="hero-explore">
-      <Link to="/">Check Medical Records</Link>
+      <Link to="/search">Check Medical Records</Link>
         <img src={arrow_btn} alt=""/>
       </div>
       <div className="hero-dot-play">
