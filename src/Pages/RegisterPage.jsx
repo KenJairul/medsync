@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./RegisterPage.css";
 
 const RegisterPage = () => {
@@ -29,7 +29,6 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/medical-records`,
@@ -39,16 +38,13 @@ const RegisterPage = () => {
           body: JSON.stringify(formData),
         }
       );
-
       if (!response.ok) {
         throw new Error("Failed to register patient");
       }
-
       const data = await response.json();
-
       if (data.uniqueId) {
-        setUniqueId(data.uniqueId); // Save the unique ID for the modal
-        setShowModal(true); // Show the modal
+        setUniqueId(data.uniqueId);
+        setShowModal(true);
       } else {
         alert("Registration successful, but no unique ID was returned.");
       }
@@ -86,9 +82,7 @@ const RegisterPage = () => {
           <h2>Medical Record Registration</h2>
           <p>Please fill in the patient details below</p>
         </div>
-
         <form onSubmit={handleSubmit}>
-          {/* Patient Information Section */}
           <div className="form-section">
             <h3>Patient Information</h3>
             <div className="input-group">
@@ -101,7 +95,6 @@ const RegisterPage = () => {
                 <input type="number" name="age" onChange={handleChange} required />
               </div>
             </div>
-
             <div className="input-group">
               <div className="form-field">
                 <label>Gender</label>
@@ -117,12 +110,10 @@ const RegisterPage = () => {
                 <input type="text" name="contact" onChange={handleChange} required />
               </div>
             </div>
-
             <div className="form-field">
               <label>Address</label>
               <input type="text" name="address" onChange={handleChange} required />
             </div>
-
             <div className="input-group">
               <div className="form-field">
                 <label>Blood Type</label>
@@ -131,7 +122,6 @@ const RegisterPage = () => {
                   <option value="A+">A+</option>
                   <option value="A-">A-</option>
                   <option value="B+">B+</option>
-                  <option value="B-">B-</option>
                   <option value="AB+">AB+</option>
                   <option value="AB-">AB-</option>
                   <option value="O+">O+</option>
@@ -144,8 +134,6 @@ const RegisterPage = () => {
               </div>
             </div>
           </div>
-
-          {/* Medical Details Section */}
           <div className="form-section">
             <h3>Medical Details</h3>
             <div className="form-field">
@@ -165,8 +153,6 @@ const RegisterPage = () => {
               <textarea name="doctorNotes" onChange={handleChange}></textarea>
             </div>
           </div>
-
-          {/* Hospital Information Section */}
           <div className="form-section">
             <h3>Hospital Information</h3>
             <div className="input-group">
@@ -186,19 +172,15 @@ const RegisterPage = () => {
               </div>
               <div className="form-field">
                 <label>Discharge Date</label>
-                <input type="date" name="dischargeDate" onChange={handleChange} min={new Date().toISOString().split('T')[0]} />
+                <input type="date" name="dischargeDate" onChange={handleChange} min={new Date().toISOString().split("T")[0]} />
               </div>
             </div>
           </div>
-
-          {/* Submit Button */}
           <div className="button-container">
             <button type="submit">Register Patient</button>
           </div>
         </form>
       </div>
-
-      {/* Modal */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-box">
@@ -207,7 +189,9 @@ const RegisterPage = () => {
             </div>
             <div className="modal-content">
               <p>The patient has been successfully registered in the system.</p>
-              <p><strong>Unique ID:</strong> {uniqueId}</p>
+              <p>
+                <strong>Unique ID:</strong> {uniqueId}
+              </p>
             </div>
             <div className="modal-actions">
               <button onClick={handleCloseModal}>Close</button>

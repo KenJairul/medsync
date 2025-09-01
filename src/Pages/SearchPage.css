@@ -37,13 +37,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* --- Search Container Layout --- */
 .search-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 2.5rem;
+  padding: 120px 2.5rem 2.5rem 2.5rem;
   gap: 2rem;
 }
 
@@ -828,7 +828,7 @@ body {
 
 @media (max-width: 768px) {
   .search-container {
-    padding: 1.5rem 1rem;
+    padding: 120px 1.5rem 1.5rem 1rem; /* Maintained navbar spacing */
   }
   .search-form {
     flex-direction: column;
@@ -919,7 +919,7 @@ body {
 
 @media (max-width: 480px) {
   .search-container {
-    padding: 1rem 0.75rem;
+    padding: 120px 1rem 1rem 0.75rem; /* Maintained navbar spacing */
   }
   .search-header {
     padding: 1.5rem 1rem;

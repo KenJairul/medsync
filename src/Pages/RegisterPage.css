@@ -34,9 +34,11 @@ body {
 .register-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-height: 100vh;
-  padding: 2.5rem 1rem;
+  padding: 120px 1rem 2.5rem 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .register-box {
